@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function Record() {
+export default function Transaction() {
   const [form, setForm] = useState({
-    name: "",
-    position: "",
-    level: "",
+    amount: "",
+    description: "",
+    type: "",
   });
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
@@ -26,7 +26,7 @@ export default function Record() {
       }
       const record = await response.json();
       if (!record) {
-        console.warn(`Record with id ${id} not found`);
+        console.warn(`Transaction with id ${id} not found`);
         navigate("/");
         return;
       }
@@ -46,26 +46,26 @@ export default function Record() {
   // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
-    const person = { ...form };
+    const transaction = { ...form };
     try {
       let response;
       if (isNew) {
-        // if we are adding a new record we will POST to /record.
-        response = await fetch("http://localhost:5050/record", {
+        // if we are adding a new record we will POST to /transaction.
+        response = await fetch("http://localhost:5050/transaction", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(person),
+          body: JSON.stringify(transaction),
         });
       } else {
-        // if we are updating a record we will PATCH to /record/:id.
-        response = await fetch(`http://localhost:5050/record/${params.id}`, {
+        // if we are updating a record we will PATCH to /transaction/:id.
+        response = await fetch(`http://localhost:5050/transaction/${params.id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(person),
+          body: JSON.stringify(transaction),
         });
       }
 
@@ -75,7 +75,7 @@ export default function Record() {
     } catch (error) {
       console.error('A problem occurred with your fetch operation: ', error);
     } finally {
-      setForm({ name: "", position: "", level: "" });
+      setForm({ amount: "", description: "", type: "" });
       navigate("/");
     }
   }
@@ -102,7 +102,7 @@ export default function Record() {
           <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 ">
             <div className="sm:col-span-4">
               <label
-                htmlFor="name"
+                htmlFor="amount"
                 className="block text-sm font-medium leading-6 text-slate-900"
               >
                 Amount
@@ -111,12 +111,12 @@ export default function Record() {
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-slate-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
                     type="text"
-                    name="Amount"
-                    id="Amount"
+                    amount="amount"
+                    id="amount"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="How much did you buy/receive?"
-                    value={form.name}
-                    onChange={(e) => updateForm({ name: e.target.value })}
+                    value={form.amount}
+                    onChange={(e) => updateForm({ amount: e.target.value })}
                   />
                 </div>
               </div>
@@ -136,8 +136,8 @@ export default function Record() {
                     id="description"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="What did you buy/receive?"
-                    value={form.position}
-                    onChange={(e) => updateForm({ position: e.target.value })}
+                    value={form.description}
+                    onChange={(e) => updateForm({ description: e.target.value })}
                   />
                 </div>
               </div>
@@ -148,31 +148,31 @@ export default function Record() {
                 <div className="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                   <div className="flex items-center">
                     <input
-                      id="positionExpense"
-                      name="positionOptions"
+                      id="typeIncome"
+                      name="typeOptions"
                       type="radio"
-                      value="Expense"
+                      value="income"
                       className="h-4 w-4 border-slate-300 text-slate-600 focus:ring-slate-600 cursor-pointer"
-                      checked={form.level === "Expense"}
-                      onChange={(e) => updateForm({ level: e.target.value })}
+                      checked={form.type === "income"}
+                      onChange={(e) => updateForm({ type: e.target.value })}
                     />
                     <label
-                      htmlFor="positionIntern"
+                      htmlFor="typeIncome"
                       className="ml-3 block text-sm font-medium leading-6 text-slate-900 mr-4"
                     >
                       Income
                     </label>
                     <input
-                      id="positionIncome"
-                      name="positionOptions"
+                      id="typeExpense"
+                      name="typeOptions"
                       type="radio"
-                      value="Income"
+                      value="expense"
                       className="h-4 w-4 border-slate-300 text-slate-600 focus:ring-slate-600 cursor-pointer"
-                      checked={form.level === "Income"}
-                      onChange={(e) => updateForm({ level: e.target.value })}
+                      checked={form.type === "expense"}
+                      onChange={(e) => updateForm({ type: e.target.value })}
                     />
                     <label
-                      htmlFor="positionIncome"
+                      htmlFor="typeExpense"
                       className="ml-3 block text-sm font-medium leading-6 text-slate-900 mr-4"
                     >
                       Expense
