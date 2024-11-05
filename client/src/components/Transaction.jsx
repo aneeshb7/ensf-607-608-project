@@ -17,20 +17,20 @@ export default function Transaction() {
       if(!id) return;
       setIsNew(false);
       const response = await fetch(
-        `http://localhost:5050/record/${params.id.toString()}`
+        `http://localhost:5050/transaction/${params.id.toString()}`
       );
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
         console.error(message);
         return;
       }
-      const record = await response.json();
-      if (!record) {
+      const transaction = await response.json();
+      if (!transaction) {
         console.warn(`Transaction with id ${id} not found`);
         navigate("/");
         return;
       }
-      setForm(record);
+      setForm(transaction);
     }
     fetchData();
     return;
@@ -50,7 +50,7 @@ export default function Transaction() {
     try {
       let response;
       if (isNew) {
-        // if we are adding a new record we will POST to /transaction.
+        // if we are adding a new transaction we will POST to /transaction.
         response = await fetch("http://localhost:5050/transaction", {
           method: "POST",
           headers: {
@@ -59,7 +59,7 @@ export default function Transaction() {
           body: JSON.stringify(transaction),
         });
       } else {
-        // if we are updating a record we will PATCH to /transaction/:id.
+        // if we are updating a transaction we will PATCH to /transaction/:id.
         response = await fetch(`http://localhost:5050/transaction/${params.id}`, {
           method: "PATCH",
           headers: {

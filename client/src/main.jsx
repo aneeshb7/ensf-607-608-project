@@ -8,6 +8,7 @@ import App from "./App";
 import "./index.css";
 import Transaction from "./components/Transaction";
 import TransactionList from "./components/TransactionList";
+import BudgetList from "./components/BudgetList";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,16 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <TransactionList />,
+      },
+    ],
+  },
+  {
+    path: "/transactions",
+    element: <App />,
+    children: [
+      {
+        path: "/transactions",
         element: <TransactionList />,
       },
     ],
@@ -37,6 +48,16 @@ const router = createBrowserRouter([
       {
         path: "/create",
         element: <Transaction />,
+      },
+    ],
+  },
+  {
+    path: "/budgets",
+    element: <App />,
+    children: [
+      {
+        path: "/budgets",
+        element: <BudgetList />,
       },
     ],
   },
