@@ -5,9 +5,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from "./App";
-import Record from "./components/Record";
-import RecordList from "./components/RecordList";
 import "./index.css";
+import Transaction from "./components/Transaction";
+import TransactionList from "./components/TransactionList";
+import BudgetList from "./components/BudgetList";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <RecordList />,
+        element: <TransactionList />,
+      },
+    ],
+  },
+  {
+    path: "/transactions",
+    element: <App />,
+    children: [
+      {
+        path: "/transactions",
+        element: <TransactionList />,
       },
     ],
   },
@@ -26,7 +37,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/edit/:id",
-        element: <Record />,
+        element: <Transaction />,
       },
     ],
   },
@@ -36,7 +47,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/create",
-        element: <Record />,
+        element: <Transaction />,
+      },
+    ],
+  },
+  {
+    path: "/budgets",
+    element: <App />,
+    children: [
+      {
+        path: "/budgets",
+        element: <BudgetList />,
       },
     ],
   },
