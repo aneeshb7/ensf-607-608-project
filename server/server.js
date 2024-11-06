@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import records from "./routes/record.js";
+import transactions from "./routes/transaction.js";
 import dbConnect from "./db/connection.js";
 
 dotenv.config();
@@ -11,7 +11,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/record", records);
+app.use("/transaction", transactions);
 
 // connect to mongodb
 dbConnect();
