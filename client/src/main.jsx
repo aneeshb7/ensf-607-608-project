@@ -8,6 +8,7 @@ import App from "./App";
 import "./index.css";
 import Transaction from "./components/Transaction";
 import TransactionList from "./components/TransactionList";
+import ChatScreen from "./components/ChatScreen";
 import BudgetList from "./components/BudgetList";
 
 const router = createBrowserRouter([
@@ -61,6 +62,16 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/chat",
+    element: <App />,
+    children: [
+      {
+        path: "/chat",
+        element: <ChatScreen />,
+      }
+    ],
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
