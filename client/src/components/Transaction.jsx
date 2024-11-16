@@ -177,6 +177,30 @@ export default function Transaction() {
                     >
                       Expense
                     </label>
+                    <div className="mt-4">
+                    <label
+                      htmlFor="category"
+                      className="block text-sm font-medium leading-6 text-slate-900"
+                    >
+                      Category
+                    </label>
+                    <select
+                      id="category"
+                      name="category"
+                      className="mt-2 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-slate-600 focus:border-slate-600 sm:text-sm rounded-md"
+                      value={form.category}
+                      onChange={(e) => updateForm({ category: e.target.value })}
+                    >
+                      <option value="">Select a category</option>
+                      <option value="food">Food</option>
+                      <option value="luxury">Luxury</option>
+                      <option value="transportation">Transportation</option>
+                      <option value="entertainment">Entertainment</option>
+                      <option value="utilities">Utilities</option>
+                      <option value="health">Health</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
                   </div>
                 </div>
               </fieldset>
