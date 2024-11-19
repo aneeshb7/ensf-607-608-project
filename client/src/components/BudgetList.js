@@ -32,7 +32,7 @@ export default function BudgetList() {
       const currentMonth = currentDate.getMonth() + 1;
       const currentYear = currentDate.getFullYear();
 
-      const response = await fetch(`http://localhost:5050/api/gemini/generateBudget`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/gemini/generateBudget`, {
         method: "POST",
           headers: {
             'Authorization': `Bearer ${user.token}`,
@@ -75,7 +75,7 @@ export default function BudgetList() {
       );
     });
   }
-  
+
   return (
     <>
       <h3 className="text-lg font-semibold p-4">Budget History</h3>
