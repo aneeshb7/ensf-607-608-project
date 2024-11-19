@@ -11,7 +11,7 @@ const AuthPage = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const endpoint = isLogin ? `${import.meta.env.VITE_API_URL}/authentication/login` : `${import.meta.env.VITE_API_URL}/authentication/register`;
+    const endpoint = isLogin ? 'https://budget-tracker-server-git-tempbranch-aneeshb7s-projects.vercel.app/api/authentication/login' : 'https://budget-tracker-server-git-tempbranch-aneeshb7s-projects.vercel.app/api/authentication/register';
 
     try {
       const response = await fetch(endpoint, {
