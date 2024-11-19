@@ -10,6 +10,10 @@ import Transaction from "./components/Transaction";
 import TransactionList from "./components/TransactionList";
 import ChatScreen from "./components/ChatScreen";
 import BudgetList from "./components/BudgetList";
+import GoalList from "./components/GoalList";
+import Goal from "./components/Goal";
+import AccountPage from "./components/AccountPage";
+import { UserProvider } from "./context/UserContext";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +67,36 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/goals",
+    element: <App />,
+    children: [
+      {
+        path: "/goals",
+        element: <GoalList />,
+      },
+    ],
+  },
+  {
+    path: "/edit-goal/:id",
+    element: <App />,
+    children: [
+      {
+        path: "/edit-goal/:id",
+        element: <Goal />,
+      },
+    ],
+  },
+  {
+    path: "/create-goal",
+    element: <App />,
+    children: [
+      {
+        path: "/create-goal",
+        element: <Goal />,
+      },
+    ],
+  },
+  {
     path: "/chat",
     element: <App />,
     children: [
@@ -71,11 +105,23 @@ const router = createBrowserRouter([
         element: <ChatScreen />,
       }
     ],
-  }
+  },
+  {
+    path: "/account",
+    element: <App />,
+    children: [
+      {
+        path: "/account",
+        element: <AccountPage />, 
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>
 );

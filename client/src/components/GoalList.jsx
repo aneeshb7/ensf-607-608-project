@@ -2,28 +2,19 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from '../context/UserContext';
 
-const Transaction = (props) => (
+const Goal = (props) => (
   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-      {props.transaction.name}
+      {props.goal.categoryID}
     </td>
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-      {props.transaction.date ? new Date(props.transaction.date).toLocaleDateString() : 'N/A'}
-    </td>
-    <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-      ${props.transaction.amount}
-    </td>
-    <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-      {props.transaction.description}
-    </td>
-    <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-      {props.transaction.type}
+      ${props.goal.targetAmount}
     </td>
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
       <div className="flex gap-2">
         <Link
           className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-slate-100 h-9 rounded-md px-3"
-          to={`/edit/${props.transaction._id}`}
+          to={`/edit-goal/${props.goal._id}`}
         >
           Edit
         </Link>
@@ -31,9 +22,7 @@ const Transaction = (props) => (
           className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-slate-100 hover:text-accent-foreground h-9 rounded-md px-3"
           color="red"
           type="button"
-          onClick={() => {
-            props.deleteTransaction(props.transaction._id);
-          }}
+          onClick={() => props.deleteGoal(props.goal._id)}
         >
           Delete
         </button>
@@ -42,14 +31,13 @@ const Transaction = (props) => (
   </tr>
 );
 
-
-export default function TransactionList() {
-  const [transactions, setTransactions] = useState([]);
+export default function GoalList() {
+  const [goals, setGoals] = useState([]);
   const { user } = useUser();
 
   useEffect(() => {
-    async function getTransactions() {
-      const response = await fetch(`http://localhost:5050/api/transaction/user/${user.id}`, {
+    async function getGoals() {
+      const response = await fetch(`http://localhost:5050/api/goal/user/${user.id}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${user.token}`,
@@ -58,68 +46,58 @@ export default function TransactionList() {
       });
 
       if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        console.error(message);
+        console.error(`An error occurred: ${response.statusText}`);
         return;
       }
-      const transactions = await response.json();
-      setTransactions(transactions);
+
+      const goals = await response.json();
+      setGoals(goals);
     }
-    getTransactions();
+    getGoals();
   }, [user.id, user.token]);
 
-  async function deleteTransaction(id) {
-    await fetch(`http://localhost:5050/api/transaction/${id}`, {
+  async function deleteGoal(id) {
+    await fetch(`http://localhost:5050/api/goal/${id}`, {
       method: "DELETE",
       headers: {
         'Authorization': `Bearer ${user.token}`,
         'Content-Type': 'application/json',
       },
     });
-    const newTransactions = transactions.filter((tr) => tr._id !== id);
-    setTransactions(newTransactions);
+    setGoals(goals.filter((goal) => goal._id !== id));
   }
 
-  function transactionList() {
-    return transactions.map((transaction) => (
-      <Transaction
-        transaction={transaction}
-        deleteTransaction={() => deleteTransaction(transaction._id)}
-        key={transaction._id}
+  function renderGoals() {
+    return goals.map((goal) => (
+      <Goal
+        goal={goal}
+        deleteGoal={() => deleteGoal(goal._id)}
+        key={goal._id}
       />
     ));
   }
 
   return (
     <>
-      <h3 className="text-lg font-semibold p-4">Transaction History</h3>
+      <h3 className="text-lg font-semibold p-4">Goals</h3>
       <div className="border rounded-lg overflow-hidden">
         <div className="relative w-full overflow-auto">
           <table className="w-full caption-bottom text-sm">
             <thead className="[&_tr]:border-b">
               <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Name
+                  Category
                 </th>
                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Date
+                  Target Amount
                 </th>
                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Amount
-                </th>
-                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Description
-                </th>
-                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Type
-                </th>
-                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Action
+                  Actions
                 </th>
               </tr>
             </thead>
             <tbody className="[&_tr:last-child]:border-0">
-              {transactionList()}
+              {renderGoals()}
             </tbody>
           </table>
         </div>

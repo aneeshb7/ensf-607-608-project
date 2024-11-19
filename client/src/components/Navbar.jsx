@@ -1,24 +1,85 @@
 import { NavLink } from "react-router-dom";
+import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const { logout } = useUser(); 
+  const navigate = useNavigate();  
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <div>
-      <nav className="flex justify-between items-center mb-6">
-        <NavLink to="/">
-          <img alt="MongoDB logo" className="h-10 inline" src="https://d3cy9zhslanhfa.cloudfront.net/media/3800C044-6298-4575-A05D5C6B7623EE37/4B45D0EC-3482-4759-82DA37D8EA07D229/webimage-8A27671A-8A53-45DC-89D7BF8537F15A0D.png"></img>
+      <nav className="flex justify-between items-center mb-6 px-6 py-4 bg-white shadow-md">
+        {/* Logo and Text Section */}
+        <NavLink to="/" className="flex items-center space-x-3">
+          <img
+            alt="logo"
+            className="h-12 inline"
+            src="/budget_tracker.jpg"
+          />
+          <span className="text-2xl font-bold text-gray-800">Budget Tracker</span>
         </NavLink>
 
-        <NavLink className="inline-flex items-center justify-center whitespace-nowrap text-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-slate-100 h-9 rounded-md px-3" to="/budgets">
+        {/* Navigation Links */}
+        <NavLink
+          className="text-md font-medium text-gray-700 hover:text-blue-500 transition-colors duration-300 px-4 py-2 rounded-lg focus:outline-none"
+          to="/budgets"
+        >
           Generate Budget
         </NavLink>
 
-        <NavLink className="inline-flex items-center justify-center whitespace-nowrap text-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-slate-100 h-9 rounded-md px-3" to="/create">
+        <NavLink
+          className="text-md font-medium text-gray-700 hover:text-blue-500 transition-colors duration-300 px-4 py-2 rounded-lg focus:outline-none"
+          to="/create"
+        >
           Add Transaction
         </NavLink>
 
-        <NavLink className="inline-flex items-center justify-center whitespace-nowrap text-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-slate-100 h-9 rounded-md px-3" to="/chat">
+        <NavLink
+          className="text-md font-medium text-gray-700 hover:text-blue-500 transition-colors duration-300 px-4 py-2 rounded-lg focus:outline-none"
+          to="/"
+        >
+          View Transactions
+        </NavLink>
+
+        <NavLink
+          className="text-md font-medium text-gray-700 hover:text-blue-500 transition-colors duration-300 px-4 py-2 rounded-lg focus:outline-none"
+          to="/create-goal"
+        >
+          Add Goal
+        </NavLink>
+
+        <NavLink
+          className="text-md font-medium text-gray-700 hover:text-blue-500 transition-colors duration-300 px-4 py-2 rounded-lg focus:outline-none"
+          to="/goals"
+        >
+          View Goals
+        </NavLink>
+
+        <NavLink
+          className="text-md font-medium text-gray-700 hover:text-blue-500 transition-colors duration-300 px-4 py-2 rounded-lg focus:outline-none"
+          to="/chat"
+        >
           Chatbot
         </NavLink>
+
+        <NavLink
+          className="text-md font-medium text-gray-700 hover:text-blue-500 transition-colors duration-300 px-4 py-2 rounded-lg focus:outline-none"
+          to="/account"
+        >
+          My Account
+        </NavLink>
+
+        <button
+          className="text-md font-medium text-gray-700 hover:text-red-500 transition-colors duration-300 px-4 py-2 rounded-lg focus:outline-none"
+          onClick={handleLogout}
+        >
+          Log out
+        </button>
       </nav>
     </div>
   );

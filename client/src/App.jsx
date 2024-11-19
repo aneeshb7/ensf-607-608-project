@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import AuthPage from './components/AuthPage';
 import Navbar from './components/Navbar';
+import { useUser } from "./context/UserContext";
 import { Outlet } from 'react-router-dom';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
+  const { user, login } = useUser();
+  const handleLogin = (username, id, token) => {
+    login(username, id, token);
   };
 
   return (
     <div>
-      {isLoggedIn ? (
+      {user.isLoggedIn ? (
         <div className="w-full p-6">
         <Navbar />
         <Outlet />

@@ -2,11 +2,9 @@ import Transaction from "../models/transaction.js";
 
 // Create transaction
 export const createTransaction = async (req, res) => {
-    const { name, date, amount, type } = req.body;
-    const userID = req.user.id;  // userID is extracted from JWT payload
-
+    const { name, date, amount, description, type, category, userID } = req.body;
     try {
-        const newTransaction = new Transaction({ name, date, amount, type, userID });
+        const newTransaction = new Transaction({ name, date, amount, description, type, category, userID });
         await newTransaction.save();
         res.status(201).json(newTransaction);
     } catch (error) {
@@ -17,10 +15,9 @@ export const createTransaction = async (req, res) => {
 // Get a single transaction by ID
 export const getTransaction = async (req, res) => {
     const { id } = req.params;
-    const userID = req.user.id;
 
     try {
-        const transaction = await Transaction.findOne({ _id: id, userID });
+        const transaction = await Transaction.findOne({ _id: id });
         if (!transaction) {
             return res.status(404).json({ message: "Transaction not found" });
         }
@@ -32,7 +29,8 @@ export const getTransaction = async (req, res) => {
 
 // Get all transactions for the authenticated user
 export const getAllTransactions = async (req, res) => {
-    const userID = req.user.id;
+    const { id } = req.params;
+    const userID = id;
 
     try {
         const transactions = await Transaction.find({ userID });
@@ -46,10 +44,9 @@ export const getAllTransactions = async (req, res) => {
 export const updateTransaction = async (req, res) => {
     const { id } = req.params;
     const updates = req.body;
-    const userID = req.user.id;
 
     try {
-        const transaction = await Transaction.findOneAndUpdate({ _id: id, userID }, updates, { new: true });
+        const transaction = await Transaction.findOneAndUpdate({ _id: id }, updates, { new: true });
         if (!transaction) {
             return res.status(404).json({ message: "Transaction not found or unauthorized" });
         }
@@ -62,10 +59,9 @@ export const updateTransaction = async (req, res) => {
 // Delete transaction
 export const deleteTransaction = async (req, res) => {
     const { id } = req.params;
-    const userID = req.user.id;
 
     try {
-        const transaction = await Transaction.findOneAndDelete({ _id: id, userID });
+        const transaction = await Transaction.findOneAndDelete({ _id: id });
         if (!transaction) {
             return res.status(404).json({ message: "Transaction not found or unauthorized" });
         }
