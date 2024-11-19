@@ -57,7 +57,7 @@ export default function BudgetList() {
   }, [hasFetched]);
 
   async function deleteBudget(id) {
-    await fetch(`http://localhost:5050/budget/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/budget/${id}`, {
       method: "DELETE",
     });
     const newBudgets = budgets.filter((tr) => tr._id !== id);

@@ -11,7 +11,7 @@ const AuthPage = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const endpoint = isLogin ? `${API_URL}/authentication/login` : `${import.meta.env.VITE_API_URL}/authentication/register`;
+    const endpoint = isLogin ? `${import.meta.env.VITE_API_URL}/authentication/login` : `${import.meta.env.VITE_API_URL}/authentication/register`;
 
     try {
       const response = await fetch(endpoint, {
