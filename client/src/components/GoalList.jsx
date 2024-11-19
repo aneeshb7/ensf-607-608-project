@@ -37,7 +37,7 @@ export default function GoalList() {
 
   useEffect(() => {
     async function getGoals() {
-      const response = await fetch(`http://localhost:5050/api/goal/user/${user.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/goal/user/${user.id}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${user.token}`,
@@ -57,7 +57,7 @@ export default function GoalList() {
   }, [user.id, user.token]);
 
   async function deleteGoal(id) {
-    await fetch(`http://localhost:5050/api/goal/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/goal/${id}`, {
       method: "DELETE",
       headers: {
         'Authorization': `Bearer ${user.token}`,
