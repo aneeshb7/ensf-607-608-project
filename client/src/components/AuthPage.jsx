@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const AuthPage = ({ onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [form, setForm] = useState({ username: '', password: '' });
-
+  console.log(import.meta.env.VITE_API_URL);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
