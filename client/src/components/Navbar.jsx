@@ -21,7 +21,7 @@ export default function Navbar() {
             className="h-12 inline"
             src="/budget_tracker.jpg"
           />
-          <span className="text-2xl font-bold text-gray-800">Budget Tracker</span>
+          <span className="text-2xl font-bold text-gray-800">SaveSense</span>
         </NavLink>
 
         {/* Navigation Links */}
