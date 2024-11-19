@@ -4,14 +4,14 @@ import validator from 'validator';
 const userSchema =  new mongoose.Schema({
     firstName: {
         type: String, 
-        required: true,
+        required: false,
         min: 2,
         max: 50,
 
     },
     lastName: {
         type: String,
-        required: true,
+        required: false,
         min: 2,
         max: 50,
     },
@@ -22,7 +22,7 @@ const userSchema =  new mongoose.Schema({
     },
     email: {
         type: String, 
-        required: true,
+        required: false,
         validate: validator.isEmail,
     },
     password: {

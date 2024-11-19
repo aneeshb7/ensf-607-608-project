@@ -3,7 +3,7 @@ import Goal from "../models/goal.js";
 // Create goal
 export const createGoal = async (req, res) => {
     const { categoryID, targetAmount } = req.body;
-    const userID = req.user.id;  // userID is extracted from JWT payload
+    const userID = req.user.id;
 
     try {
         const newGoal = new Goal({ categoryID, targetAmount, userID });
@@ -32,7 +32,8 @@ export const getGoal = async (req, res) => {
 
 // Get all goals for the authenticated user
 export const getAllGoals = async (req, res) => {
-    const userID = req.user.id;
+    const { id } = req.params;
+    const userID = id;
 
     try {
         const goals = await Goal.find({ userID });

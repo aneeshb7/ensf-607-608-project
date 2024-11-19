@@ -17,7 +17,7 @@ router.post("/", verifyToken, createAccount);
 router.get("/:id", verifyToken, getAccount);
 
 // Get all accounts for the authenticated user
-router.get("/", verifyToken, getAllAccounts);
+router.get("/user/:id", verifyToken, getAllAccounts);
 
 // Update account
 router.put("/:id", verifyToken, updateAccount);

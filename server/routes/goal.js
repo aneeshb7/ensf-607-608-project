@@ -17,7 +17,7 @@ router.post("/", verifyToken, createGoal);
 router.get("/:id", verifyToken, getGoal);
 
 // Get all goals for the authenticated user
-router.get("/", verifyToken, getAllGoals);
+router.get("/user/:id", verifyToken, getAllGoals);
 
 // Update goal
 router.put("/:id", verifyToken, updateGoal);

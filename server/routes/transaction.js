@@ -17,7 +17,7 @@ router.post("/", verifyToken, createTransaction);
 router.get("/:id", verifyToken, getTransaction);
 
 // Get all transactions for the authenticated user
-router.get("/", verifyToken, getAllTransactions);
+router.get("/user/:id", verifyToken, getAllTransactions);
 
 // Update transaction
 router.put("/:id", verifyToken, updateTransaction);

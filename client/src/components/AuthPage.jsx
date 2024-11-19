@@ -9,10 +9,27 @@ const AuthPage = ({ onLogin }) => {
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login or profile creation logic here
-    onLogin();
+    const endpoint = isLogin ? 'http://localhost:5050/api/authentication/login' : 'http://localhost:5050/api/authentication/register';
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message); 
+      }
+
+      const data = await response.json();
+      onLogin(data.user.username, data.user._id, data.token);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
