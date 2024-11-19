@@ -75,7 +75,7 @@ export default function BudgetList() {
       );
     });
   }
-
+  
   return (
     <>
       <h3 className="text-lg font-semibold p-4">Budget History</h3>
