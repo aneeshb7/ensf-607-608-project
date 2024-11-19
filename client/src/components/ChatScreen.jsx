@@ -14,7 +14,7 @@ const ChatScreen = () => {
 
       setTimeout(async () => {
         try {
-          const response = await fetch('http://localhost:5050/api/gemini/generate', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/gemini/generate`, {
             method: 'POST',
             headers: {
               Authorization: `Bearer ${user.token}`,

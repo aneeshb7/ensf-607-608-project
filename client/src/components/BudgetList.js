@@ -32,7 +32,7 @@ export default function BudgetList() {
       const currentMonth = currentDate.getMonth() + 1;
       const currentYear = currentDate.getFullYear();
 
-      const response = await fetch(`http://localhost:5050/api/gemini/generateBudget`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/gemini/generateBudget`, {
         method: "POST",
           headers: {
             'Authorization': `Bearer ${user.token}`,
@@ -57,7 +57,7 @@ export default function BudgetList() {
   }, [hasFetched]);
 
   async function deleteBudget(id) {
-    await fetch(`http://localhost:5050/budget/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/budget/${id}`, {
       method: "DELETE",
     });
     const newBudgets = budgets.filter((tr) => tr._id !== id);
