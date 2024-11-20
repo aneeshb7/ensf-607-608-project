@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from '../constants';
 
 export default function Navbar() {
   const { logout } = useUser(); 

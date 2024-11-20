@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useUser } from '../context/UserContext';
+import { API_URL } from '../constants';
 
 export default function Transaction() {
   const [form, setForm] = useState({
@@ -21,7 +22,7 @@ export default function Transaction() {
       const id = params.id?.toString() || undefined;
       if (!id) return;
       setIsNew(false);
-      const response = await fetch(`https://budgettrackerio.onrender.com/api/transaction/${id}`, {
+      const response = await fetch(`${API_URL}/transaction/${id}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`,
         },
@@ -66,7 +67,7 @@ export default function Transaction() {
     try {
       let response;
       if (isNew) {
-        response = await fetch(`https://budgettrackerio.onrender.com/api/transaction`, {
+        response = await fetch(`${API_URL}/transaction`, {
           method: "POST",
           headers: {
             'Authorization': `Bearer ${user.token}`,
@@ -75,7 +76,7 @@ export default function Transaction() {
           body: JSON.stringify(transaction),
         });
       } else {
-        response = await fetch(`https://budgettrackerio.onrender.com/api/transaction/${params.id}`, {
+        response = await fetch(`${API_URL}/transaction/${params.id}`, {
           method: "PUT",
           headers: {
             'Authorization': `Bearer ${user.token}`,

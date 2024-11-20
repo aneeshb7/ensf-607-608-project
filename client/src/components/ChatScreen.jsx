@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useUser } from '../context/UserContext';
+import { API_URL } from '../constants';
 
 const ChatScreen = () => {
   const { user } = useUser();
@@ -14,7 +15,7 @@ const ChatScreen = () => {
 
       setTimeout(async () => {
         try {
-          const response = await fetch(`https://budgettrackerio.onrender.com/api/gemini/generate`, {
+          const response = await fetch(`${API_URL}/gemini/generate`, {
             method: 'POST',
             headers: {
               Authorization: `Bearer ${user.token}`,
