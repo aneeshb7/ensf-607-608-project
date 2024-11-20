@@ -31,7 +31,6 @@ app.use("/api/gemini", gemini);
 // connect to mongodb
 dbConnect();
 
-// start the server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
