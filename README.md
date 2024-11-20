@@ -1,10 +1,4 @@
 # ensf-607-608-project
 Repo for ENSF 607 and ENF 608 project
 
-# Instructions for running:
-
-In the `server` directory, run: `nodemon --env-file=.env server`
-
-Open up a new terminal window. In the `client` directory, run: `npm run dev`
-
-After running `npm run dev`, copy and paste the localhost link that the terminal outputs into your browser.
+[Link to app](https://budget-tracker-frontend-fawn.vercel.app/)
