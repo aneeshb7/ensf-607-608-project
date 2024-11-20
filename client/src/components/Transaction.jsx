@@ -180,7 +180,7 @@ export default function Transaction() {
             <div className="sm:col-span-4">
               <fieldset className="mt-4">
                 <legend className="sr-only">Transaction Type</legend>
-                <div className="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+                <div className="space-y-4 space-x-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                   <div className="flex items-center">
                     <input
                       id="typeIncome"
@@ -199,7 +199,7 @@ export default function Transaction() {
                       name="typeOptions"
                       type="radio"
                       value="Expense"
-                      className="h-4 w-4 border-slate-300 text-slate-600 focus:ring-slate-600 cursor-pointer"
+                      className="ml-3 h-4 w-4 border-slate-300 text-slate-600 focus:ring-slate-600 cursor-pointer"
                       checked={form.type === "Expense"}
                       onChange={(e) => updateForm({ type: e.target.value })}
                     />
@@ -224,13 +224,13 @@ export default function Transaction() {
                   onChange={(e) => updateForm({ category: e.target.value })}
                 >
                   <option value="">Select a category</option>
-                  <option value="food">Food</option>
-                  <option value="luxury">Luxury</option>
-                  <option value="transportation">Transportation</option>
-                  <option value="entertainment">Entertainment</option>
-                  <option value="utilities">Utilities</option>
-                  <option value="health">Health</option>
-                  <option value="other">Other</option>
+                  <option value="Food">Food</option>
+                  <option value="Luxury">Luxury</option>
+                  <option value="Transportation">Transportation</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Utilities">Utilities</option>
+                  <option value="Health">Health</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
             </div>
