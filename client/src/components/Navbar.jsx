@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from '../constants';
 
 export default function Navbar() {
   const { logout } = useUser(); 
@@ -21,7 +22,7 @@ export default function Navbar() {
             className="h-12 inline"
             src="/budget_tracker.jpg"
           />
-          <span className="text-2xl font-bold text-gray-800">Budget Tracker</span>
+          <span className="text-2xl font-bold text-gray-800">SaveSense</span>
         </NavLink>
 
         {/* Navigation Links */}

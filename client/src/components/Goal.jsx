@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useUser } from '../context/UserContext';
+import { API_URL } from '../constants';
 
 export default function Goal() {
   const [form, setForm] = useState({
@@ -17,7 +18,7 @@ export default function Goal() {
       const id = params.id?.toString() || undefined;
       if (!id) return;
       setIsNew(false);
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/goal/${id}`, {
+      const response = await fetch(`${API_URL}/goal/${id}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`,
         },
@@ -55,7 +56,7 @@ export default function Goal() {
     try {
       let response;
       if (isNew) {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/goal`, {
+        response = await fetch(`${API_URL}/goal`, {
           method: "POST",
           headers: {
             'Authorization': `Bearer ${user.token}`,
@@ -64,7 +65,7 @@ export default function Goal() {
           body: JSON.stringify(goal),
         });
       } else {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/goal/${params.id}`, {
+        response = await fetch(`${API_URL}/goal/${params.id}`, {
           method: "PUT",
           headers: {
             'Authorization': `Bearer ${user.token}`,

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../context/UserContext';
+import { API_URL } from '../constants';
 
 export default function AccountPage() {
   const [form, setForm] = useState({
@@ -16,7 +17,7 @@ export default function AccountPage() {
 
   useEffect(() => {
     async function getAccount() {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/account/user/${user.id}`, {
+      const response = await fetch(`${API_URL}/account/user/${user.id}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -47,7 +48,7 @@ export default function AccountPage() {
     try {
       let response;
       if (id) {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/account/${id}`, {
+        response = await fetch(`${API_URL}/account/${id}`, {
           method: "PUT",
           headers: {
             'Authorization': `Bearer ${user.token}`,
@@ -56,7 +57,7 @@ export default function AccountPage() {
           body: JSON.stringify(account),
         });
       } else {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/account`, {
+        response = await fetch(`${API_URL}/account`, {
           method: "POST",
           headers: {
             'Authorization': `Bearer ${user.token}`,

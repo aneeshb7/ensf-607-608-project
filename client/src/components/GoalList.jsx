@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from '../context/UserContext';
+import { API_URL } from '../constants';
 
 const Goal = (props) => (
   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -37,7 +38,7 @@ export default function GoalList() {
 
   useEffect(() => {
     async function getGoals() {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/goal/user/${user.id}`, {
+      const response = await fetch(`${API_URL}/goal/user/${user.id}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${user.token}`,
@@ -57,7 +58,7 @@ export default function GoalList() {
   }, [user.id, user.token]);
 
   async function deleteGoal(id) {
-    await fetch(`${import.meta.env.VITE_API_URL}/goal/${id}`, {
+    await fetch(`${API_URL}/goal/${id}`, {
       method: "DELETE",
       headers: {
         'Authorization': `Bearer ${user.token}`,
