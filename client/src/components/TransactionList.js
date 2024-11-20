@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from '../context/UserContext';
+import { API_URL } from '../constants';
 
 const Transaction = (props) => (
   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -49,7 +50,7 @@ export default function TransactionList() {
 
   useEffect(() => {
     async function getTransactions() {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/user/${user.id}`, {
+      const response = await fetch(`${API_URL}/transaction/user/${user.id}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${user.token}`,
@@ -69,7 +70,7 @@ export default function TransactionList() {
   }, [user.id, user.token]);
 
   async function deleteTransaction(id) {
-    await fetch(`${import.meta.env.VITE_API_URL}/transaction/${id}`, {
+    await fetch(`${API_URL}/transaction/${id}`, {
       method: "DELETE",
       headers: {
         'Authorization': `Bearer ${user.token}`,

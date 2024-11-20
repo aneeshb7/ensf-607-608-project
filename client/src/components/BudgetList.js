@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from '../context/UserContext';
+import { API_URL } from '../constants';
 
 const Budget = (props) => (
   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -32,7 +33,7 @@ export default function BudgetList() {
       const currentMonth = currentDate.getMonth() + 1;
       const currentYear = currentDate.getFullYear();
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/gemini/generateBudget`, {
+      const response = await fetch(`${API_URL}/gemini/generateBudget`, {
         method: "POST",
           headers: {
             'Authorization': `Bearer ${user.token}`,
@@ -57,7 +58,7 @@ export default function BudgetList() {
   }, [hasFetched]);
 
   async function deleteBudget(id) {
-    await fetch(`${import.meta.env.VITE_API_URL}/budget/${id}`, {
+    await fetch(`/budget/${id}`, {
       method: "DELETE",
     });
     const newBudgets = budgets.filter((tr) => tr._id !== id);
