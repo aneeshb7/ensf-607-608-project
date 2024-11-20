@@ -17,7 +17,7 @@ export default function Goal() {
       const id = params.id?.toString() || undefined;
       if (!id) return;
       setIsNew(false);
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/goal/${id}`, {
+      const response = await fetch(`https://budgettrackerio.onrender.com/api/goal/${id}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`,
         },
@@ -55,7 +55,7 @@ export default function Goal() {
     try {
       let response;
       if (isNew) {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/goal`, {
+        response = await fetch(`https://budgettrackerio.onrender.com/api/goal`, {
           method: "POST",
           headers: {
             'Authorization': `Bearer ${user.token}`,
@@ -64,7 +64,7 @@ export default function Goal() {
           body: JSON.stringify(goal),
         });
       } else {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/goal/${params.id}`, {
+        response = await fetch(`https://budgettrackerio.onrender.com/api/goal/${params.id}`, {
           method: "PUT",
           headers: {
             'Authorization': `Bearer ${user.token}`,

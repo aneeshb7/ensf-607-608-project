@@ -21,7 +21,7 @@ export default function Transaction() {
       const id = params.id?.toString() || undefined;
       if (!id) return;
       setIsNew(false);
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/${id}`, {
+      const response = await fetch(`https://budgettrackerio.onrender.com/api/transaction/${id}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`,
         },
@@ -66,7 +66,7 @@ export default function Transaction() {
     try {
       let response;
       if (isNew) {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/transaction`, {
+        response = await fetch(`https://budgettrackerio.onrender.com/api/transaction`, {
           method: "POST",
           headers: {
             'Authorization': `Bearer ${user.token}`,
@@ -75,7 +75,7 @@ export default function Transaction() {
           body: JSON.stringify(transaction),
         });
       } else {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/${params.id}`, {
+        response = await fetch(`https://budgettrackerio.onrender.com/api/transaction/${params.id}`, {
           method: "PUT",
           headers: {
             'Authorization': `Bearer ${user.token}`,

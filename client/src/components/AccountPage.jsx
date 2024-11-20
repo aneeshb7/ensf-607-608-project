@@ -16,7 +16,7 @@ export default function AccountPage() {
 
   useEffect(() => {
     async function getAccount() {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/account/user/${user.id}`, {
+      const response = await fetch(`https://budgettrackerio.onrender.com/api/account/user/${user.id}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -47,7 +47,7 @@ export default function AccountPage() {
     try {
       let response;
       if (id) {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/account/${id}`, {
+        response = await fetch(`https://budgettrackerio.onrender.com/api/account/${id}`, {
           method: "PUT",
           headers: {
             'Authorization': `Bearer ${user.token}`,
@@ -56,7 +56,7 @@ export default function AccountPage() {
           body: JSON.stringify(account),
         });
       } else {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/account`, {
+        response = await fetch(`https://budgettrackerio.onrender.com/api/account`, {
           method: "POST",
           headers: {
             'Authorization': `Bearer ${user.token}`,

@@ -32,7 +32,7 @@ export default function BudgetList() {
       const currentMonth = currentDate.getMonth() + 1;
       const currentYear = currentDate.getFullYear();
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/gemini/generateBudget`, {
+      const response = await fetch(`https://budgettrackerio.onrender.com/api/gemini/generateBudget`, {
         method: "POST",
           headers: {
             'Authorization': `Bearer ${user.token}`,
@@ -57,7 +57,7 @@ export default function BudgetList() {
   }, [hasFetched]);
 
   async function deleteBudget(id) {
-    await fetch(`${import.meta.env.VITE_API_URL}/budget/${id}`, {
+    await fetch(`https://budgettrackerio.onrender.com/api/budget/${id}`, {
       method: "DELETE",
     });
     const newBudgets = budgets.filter((tr) => tr._id !== id);

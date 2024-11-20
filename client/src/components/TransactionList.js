@@ -49,7 +49,7 @@ export default function TransactionList() {
 
   useEffect(() => {
     async function getTransactions() {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/user/${user.id}`, {
+      const response = await fetch(`https://budgettrackerio.onrender.com/api/transaction/user/${user.id}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${user.token}`,
@@ -69,7 +69,7 @@ export default function TransactionList() {
   }, [user.id, user.token]);
 
   async function deleteTransaction(id) {
-    await fetch(`${import.meta.env.VITE_API_URL}/transaction/${id}`, {
+    await fetch(`https://budgettrackerio.onrender.com/api/transaction/${id}`, {
       method: "DELETE",
       headers: {
         'Authorization': `Bearer ${user.token}`,
